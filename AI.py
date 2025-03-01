@@ -3,7 +3,7 @@
 # các ô được dự đoán là an toàn (-2)
 # các số nguyên > 0: số lượng mìn trong 8 ô xung quanh
 # Input giải thuật: mảng chứa các ô, số hàng, số cột
-#import random
+import random
 
 def get_neighbors(i, j, grid_size):
     """Lấy danh sách các ô lân cận của (i, j)."""
@@ -15,7 +15,7 @@ def get_neighbors(i, j, grid_size):
                 neighbors.append((ni, nj))
     return neighbors
 
-"""
+
 def rollback(table, col, row):
     #Kiểm tra các ô xung quanh (col, row). Nếu có ô số nào bị quá giới hạn mìn, mở lại một số ô bất kỳ.
     grid_size = len(table)
@@ -42,8 +42,8 @@ def rollback(table, col, row):
                 rollback_occurred = True
     
     return not rollback_occurred  # Trả về True nếu không rollback, False nếu đã rollback
-"""
 
+"""
 def rollback(table, col, row):
     #Kiểm tra các ô xung quanh (col, row). Nếu có ô số nào bị quá giới hạn mìn, chỉ rollback các ô xung quanh nó.
     grid_size = len(table)
@@ -65,7 +65,7 @@ def rollback(table, col, row):
                         table[x][y][0] = 0
                 rollback_occurred = True
     return not rollback_occurred  # Trả về True nếu không rollback, False nếu đã rollback
-
+"""
 
 def openSafe(table, col, row):
     for i in range(row):
