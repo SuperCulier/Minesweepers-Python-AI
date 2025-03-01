@@ -1,6 +1,6 @@
 import pygame
 import sys
-from ultils import load_matrix_from_file, create_table, draw_grid, handle_keypress,handle_keyCheck
+from ultils import load_matrix_from_file, create_table, draw_grid, handle_keypress,handle_keyCheck, handle_keyAuto
 #from AI import openSafe, Heuristic, selectCell
 
 # Hàm chính
@@ -31,6 +31,8 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
                     handle_keypress(table, size, event.key)  # Xử lý khi nhấn phím
+                elif event.key == pygame.K_d:
+                    handle_keyAuto(table, size, event.key)  # Xử lý khi nhấn phím
                 elif event.key == pygame.K_s:
                     handle_keyCheck(table, size, event.key)
         

@@ -116,6 +116,33 @@ def handle_keypress(table, size, key):
         #AI.selectBestCell(table, size, size)
         #AI.selectCell(table, size, size)  # Chọn ô an toàn
 
+running = False  # Biến điều khiển trạng thái chạy của AI
+
+def handle_keyAuto(table, size, key):
+    global running  # Sử dụng biến toàn cục để kiểm soát trạng thái
+
+    if key == pygame.K_d:  # Khi nhấn 'D', bắt đầu chạy AI
+        running = True
+        while running:
+            # Đặt lại xác suất của tất cả các ô chưa mở
+            for i in range(size):
+                for j in range(size):
+                    if table[i][j][0] == 0:  # Nếu ô chưa mở
+                        table[i][j][1] = 0   # Reset xác suất về 0
+
+            print("📌 AI đang xử lý...")
+            AI.openSafe(table, size, size)
+            AI.Heuristic(table, size, size)
+            AI.selectMine(table, size, size)
+            AI.selectCell(table, size, size)
+
+            # Thêm điều kiện dừng nếu nhận phím 'P'
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                    running = False
+                    print("🛑 AI đã dừng.")
+
+
 def handle_keyCheck(table, size, key):
     if key == pygame.K_s:  # Nếu nhấn phím 'S'
         print("📌 AI đang xử lý...")

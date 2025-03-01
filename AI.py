@@ -3,7 +3,7 @@
 # các ô được dự đoán là an toàn (-2)
 # các số nguyên > 0: số lượng mìn trong 8 ô xung quanh
 # Input giải thuật: mảng chứa các ô, số hàng, số cột
-#import random
+import random
 
 def get_neighbors(i, j, grid_size):
     """Lấy danh sách các ô lân cận của (i, j)."""
@@ -15,7 +15,7 @@ def get_neighbors(i, j, grid_size):
                 neighbors.append((ni, nj))
     return neighbors
 
-"""
+
 def rollback(table, col, row):
     #Kiểm tra các ô xung quanh (col, row). Nếu có ô số nào bị quá giới hạn mìn, mở lại một số ô bất kỳ.
     grid_size = len(table)
@@ -65,7 +65,7 @@ def rollback(table, col, row):
                         table[x][y][0] = 0
                 rollback_occurred = True
     return not rollback_occurred  # Trả về True nếu không rollback, False nếu đã rollback
-
+"""
 
 def openSafe(table, col, row):
     for i in range(row):
@@ -170,74 +170,3 @@ def checkSolution(table, grid_size):
     else:
         print("Các ô không thỏa mãn:", not_satisfied_cells)
 
-"""
-def selectCellWithDistance(table, col, row):
-    minProb = 1.0
-    bestCell = None
-    minDistance = float('inf')
-
-    # Lưu danh sách các ô đã mở
-    openedCells = [(i, j) for i in range(row) for j in range(col) if table[i][j][0] > 0]
-
-    for i in range(row):
-        for j in range(col):
-            if table[i][j][0] == 0:  # Ô chưa mở
-                prob = table[i][j][1]
-                if prob < minProb:
-                    minProb = prob
-                    bestCell = (i, j)
-                    minDistance = min([abs(i - x) + abs(j - y) for x, y in openedCells], default=0)
-                elif prob == minProb:
-                    # Nếu cùng xác suất, chọn ô có khoảng cách nhỏ hơn
-                    distance = min([abs(i - x) + abs(j - y) for x, y in openedCells], default=0)
-                    if distance < minDistance:
-                        bestCell = (i, j)
-                        minDistance = distance
-
-    if bestCell:
-        print(f"Chọn ô {bestCell} là ô tối ưu nhất để mở.")
-        table[bestCell[0]][bestCell[1]][0] = -2
-    #    return bestCell
-    #else:
-    #    return None
-"""
-"""  
-def selectBestCell(table, col, row):
-    bestCell = None
-    minProb = 1.0
-    maxGain = -1
-    minDistance = float('inf')
-
-    openedCells = [(i, j) for i in range(row) for j in range(col) if table[i][j][0] > 0]
-
-    for i in range(row):
-        for j in range(col):
-            if table[i][j][0] == 0:  # Ô chưa mở
-                prob = table[i][j][1]
-                infoGain = sum(
-                    1 for dx in [-1, 0, 1] for dy in [-1, 0, 1]
-                    if 0 <= i + dx < row and 0 <= j + dy < col and table[i + dx][j + dy][0] == 0
-                )
-                distance = min([abs(i - x) + abs(j - y) for x, y in openedCells], default=0)
-
-                # Ưu tiên xác suất thấp nhất
-                if prob < minProb:
-                    minProb = prob
-                    bestCell = (i, j)
-                    maxGain = infoGain
-                    minDistance = distance
-                elif prob == minProb:
-                    if infoGain > maxGain or (infoGain == maxGain and distance < minDistance):
-                        bestCell = (i, j)
-                        maxGain = infoGain
-                        minDistance = distance
-
-    if bestCell:
-        print(f"Chọn ô {bestCell} tối ưu nhất.")
-        return bestCell
-    else:
-        return None
-
-
-
-"""
